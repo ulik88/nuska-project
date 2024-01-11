@@ -1,106 +1,148 @@
-import { View, Text, ImageBackground, StyleSheet, Pressable} from 'react-native';
-import React from 'react';
-import { useNavigation } from '@react-navigation/native';
-import CurrentDetailScreen from '../../screens/CurrentDetailScreen';
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  Pressable,
+  Platform,
+  Dimensions
+} from "react-native";
+import React, { useRef } from "react";
+import { useNavigation } from "@react-navigation/native";
+import CurrentDetailScreen from "../../screens/CurrentDetailScreen";
 
+import {
+  openSansReg,
+  openSansBold,
+  PRIMARY_COLOR,
+  BLACK_COLOR,
+  THIRD_COLOR,
+  DEFAULT_FONT_SIZE,
+  WHITE_COLOR,
+  DEFAULT_HEIGHT,
+  PADDING_SMALL,
+  PADDING_MEDIUM,
+  MARGIN_SMALL,
+} from "../../constants";
 
+const ResourceCardItem = ({ title, description, content, imageSource, created_at }) => {
+  const navigation = useNavigation();
 
+  const onPress = () => {
+    navigation.navigate("CurrentDetail", {
 
-const ResourceCardItem = ({ title, description, imageSource, created_at }) => {
+      title: title,
+      description: description,
+      imageSource: imageSource,
+      created_at: created_at,
+      content: content, // Pass the content to CurrentDetailScreen
+    });
+  };
 
-    const navigation = useNavigation();
-
-    const onPress = () => {
-        navigation.navigate("CurrentDetail", { id: 1 });
-        };
-        
   return (
-    <View style={styles.cardContainer}>
-      <ImageBackground source={imageSource} style={styles.imageBackground}>
+    <View style={styles.container}>
+      <View style={styles.cardContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{title}</Text>
+        </View>
         <View style={styles.overlay}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>{title}</Text>
-          </View>
           <Text style={styles.description}>{description}</Text>
-          <Pressable
-            onPress={onPress}
-            style={[styles.wrapperCustom, ]}>
-                {({ pressed }) => (
-                <Text style={styles.textMore}>Mehr lesen</Text>
-                )}
-            </Pressable>
+          <Pressable onPress={onPress} style={[styles.wrapperCustom]}>
+            {({ pressed }) => <Text style={styles.textMore}>Mehr lesen</Text>}
+          </Pressable>
           <Text style={styles.created_at}>{created_at}</Text>
         </View>
-      </ImageBackground>
+        <View style={styles.imageSource}>
+          <ImageBackground
+            source={imageSource}
+            style={styles.imageBackground}
+          ></ImageBackground>
+        </View>
+      </View>
     </View>
   );
 };
 
+
+const isIOS = Platform.OS === 'ios';
+
 const styles = StyleSheet.create({
+  container: {
+    width: '50%',
+    padding: PADDING_SMALL,
+  },
+
   cardContainer: {
-    width: 190,
+    width: "100%",
     aspectRatio: 0.8,
-    marginLeft: 10,
-    backfaceVisibility: 'hidden',
-    shadowColor: '#000',
+    marginBottom: 10,
+    shadowColor: BLACK_COLOR,
     shadowOffset: { width: 2, height: 4 },
+    boxShadow: "3px 4px 4px 0 rgba(0, 0, 0, 0.25)",
     borderRadius: 15,
-    backgroundColor: '#E5F2FB',
-    
+    backgroundColor: THIRD_COLOR,
+
+
+
+
+  },
+  imageSource: {
+    flex: 1,
+    overflow: "hidden",
+    resizeMode: "cover",
+    borderBottomLeftRadius: 15,
+    borderBottomRightRadius: 15,
+
   },
   imageBackground: {
     flex: 1,
-    borderRadius: 15,
-    overflow: 'hidden',
+    overflow: "hidden",
+    resizeMode: "cover",
   },
   overlay: {
-    flex: 1,
-    padding: 10,
-    justifyContent: 'flex-start', // Align content to the top
-    backgroundColor: 'rgba(255, 255, 255, 0.7)',
+    padding: PADDING_MEDIUM,
   },
   titleContainer: {
-    height: 35,
-    width: '130%', // Make the titleContainer span the entire width of the card
-    position: 'absolute',
-    top: 0,
-    left: -10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#0172BB',
+    height: DEFAULT_HEIGHT,
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: PRIMARY_COLOR,
     borderRadius: 13,
   },
   title: {
-    textAlign: 'center',
-    fontSize: 12,
-    fontWeight: 'normal',
-    color: '#fff',
-   
+    textAlign: "center",
+    fontSize: DEFAULT_FONT_SIZE,
+    fontWeight: "bold",
+    color: WHITE_COLOR,
+    fontFamily: openSansBold,
   },
   description: {
-    fontSize: 12,
-    fontWeight: 'normal',
-    color: '#000',
-    fontFamily: 'Roboto',
-    marginTop: 35,
+    height: DEFAULT_HEIGHT,
+    fontSize: DEFAULT_FONT_SIZE,
+    fontWeight: "normal",
+    color: BLACK_COLOR,
+    fontFamily: openSansReg,
   },
   created_at: {
     fontSize: 10,
-    fontFamily: 'sans-serif',
-    color: '#000',
+    fontFamily: openSansReg,
+    color: BLACK_COLOR,
+    fontStyle: "italic",
+    fontWeight: "300",
+    textAlign: "right",
   },
 
   wrapperCustom: {
     borderRadius: 8,
-    padding: 6,
   },
 
   textMore: {
-    fontSize: 12,
-    fontWeight: 'normal',
-    color: '#0172BB',
-    fontFamily: 'Roboto',
-    marginTop: 5,
+    marginBottom: MARGIN_SMALL,
+    fontSize: DEFAULT_FONT_SIZE,
+    fontStyle: "italic",
+    color: PRIMARY_COLOR,
+    fontFamily: openSansReg,
   },
 });
 

@@ -8,7 +8,8 @@
     ],
     "baseUrl": "./",
     "paths": {
-      "@env/*": ["./src/components/api/@env/*"]
+      "@env/*": ["./src/components/api/@env/*"],
+      "*": ["types/*"]
     },
     "moduleResolution": "node",
     "noEmit": true,
@@ -17,7 +18,7 @@
   },
   "include": [
     "./src/**/*"
-  ],
+, "mapper"  ],
   "exclude": [
     "node_modules",
     "babel.config.js",
