@@ -2,31 +2,27 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Dimensions, StyleSheet, SafeAreaView } from 'react-native';
 import { Fontisto } from '@expo/vector-icons';
 import { mapImagesSVG } from '../utils/mapper/imageMapper';
-import { MARGIN_LARGE, SECONDARY_COLOR, openSansReg, WHITE_COLOR, BLACK_COLOR, PRIMARY_COLOR } from '../constants';
+import { NuskaColor, NuskaFonts, NuskaDimensions } from '../constants';
 import { SettingItem } from '../components/Settings/SettingItem';
 
-const SettingScreen = ({ onSettingsClick, settings, onCloseSettings }) => {
-    const [currentSettings, setCurrentSettings] = useState(['Sprachen', 'Dark Mode', 'FAQ', 'Über Uns', 'Abmelden']); // Add more settings as needed
+const SettingScreen = ({ onSettingsClick, onCloseSettings }) => {
+    const [currentSettings, setCurrentSettings] = useState(['Sprachen', 'Dark Mode', 'FAQ', 'Über Uns', 'Abmelden']);
+    const [toggleIcons, setToggleIcon] = useState(false);
 
-    const [showToggleIcon, setShowToggleIcon] = useState(false);
 
-    const handleSettingClick = (index) => {
-        console.log(`Icon clicked: ${index}`);
+
+    const handleSettingClick = (index: number) => {
         onSettingsClick(index);
+        console.log(`Icon clicked: ${index}`);
 
-        // Toggle the state and display the additional message for the first item
-        if (currentSettings && index === 0) {
-            setShowToggleIcon(!showToggleIcon);
-            console.log('Sprachen Zeigt 2 Sprachen an!');
+        if (currentSettings && index === 1) {
+            setToggleIcon(!toggleIcons);
+            console.log(toggleIcons, 'Icone DarkMode clicked!');
         }
+
     };
-
     return (
-
-        <View style={styles.viewStyle}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                {mapImagesSVG(settings)}
-            </View>
+        <View style={[styles.viewStyle, { backgroundColor: toggleIcons ? NuskaColor.PRIMARY_COLOR : NuskaColor.SECONDARY_COLOR }]}>
             <View style={styles.topRow}>
                 <TouchableOpacity style={{ padding: 10, marginHorizontal: 10 }} onPress={onCloseSettings}>
                     <Fontisto name="player-settings" size={30} color="#3e4042" />
@@ -40,12 +36,11 @@ const SettingScreen = ({ onSettingsClick, settings, onCloseSettings }) => {
                         setting={setting}
                         index={index}
                         onPress={handleSettingClick}
-                        showToggleIcon={index === 0 && showToggleIcon}
-
+                        toggleIcons={toggleIcons}
                     />
                 ))}
             </View>
-        </View >
+        </View>
     );
 };
 
@@ -54,16 +49,15 @@ const styles = StyleSheet.create({
         position: "absolute",
         flexDirection: "column",
         alignItems: "center",
-        marginLeft: 100,
-        marginTop: 10,
+        marginLeft: '25%',
+        marginTop: '20%',
         borderTopLeftRadius: 20,
         borderBottomLeftRadius: 20,
-        backgroundColor: SECONDARY_COLOR,
-        width: Dimensions.get("window").width - 100,
+        width: Dimensions.get("window").width - 80,
         height: Dimensions.get("window").height = 600,
-        zIndex: 1,
+        zIndex: 3,
         borderWidth: 0.1,
-        borderColor: BLACK_COLOR,
+        borderColor: NuskaColor.BLACK_COLOR,
         shadowColor: '8px 8px 8px 4px rgba(5, 0, 0, 0.59)',
         shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 6,
@@ -75,7 +69,7 @@ const styles = StyleSheet.create({
         width: "100%",
         backgroundColor: '#fcfcfc',
         borderBottomWidth: 1,
-        borderColor: WHITE_COLOR,
+        borderColor: NuskaColor.WHITE_COLOR,
     },
     categoryItemText: {
         fontSize: 16,
@@ -92,11 +86,11 @@ const styles = StyleSheet.create({
     },
 
     textSetting: {
-        color: BLACK_COLOR,
+        color: NuskaColor.BLACK_COLOR,
         fontSize: 20,
-        marginLeft: MARGIN_LARGE,
+        marginLeft: NuskaDimensions.MARGIN_LARGE,
         fontWeight: 'normal',
-        fontFamily: openSansReg,
+        fontFamily: NuskaFonts.openSansReg,
     },
 
     settingsRow: {

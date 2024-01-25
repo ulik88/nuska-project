@@ -1,15 +1,37 @@
+// fonts.ts
+export const NuskaFonts = {
+    openSansReg: 'OpenSans-Regular',
+    OpenSansLight: 'OpenSans-Light',
+    OpenSansMedium: 'OpenSans-Medium',
 
-export const openSansReg: string = 'OpenSans-Regular';
-export const openSansSemiBold: string = 'OpenSans-SemiBold';
-export const openSansBold: string = 'OpenSans-Bold';
+    openSansSemiBold: 'OpenSans-SemiBold',
+    openSansBold: 'OpenSans-Bold',
 
-export const DEFAULT_FONT_WEIGHT: string = 'normal';
-export const DEFAULT_FONT_SIZE: number = 12;
-export const MEDIUM_FONT_SIZE: number = 18;
+    OpenSansItalic: 'OpenSans-Italic',
+    openSansSemiBoldItalic: 'OpenSans-SemiBoldItalic',
+    openSansMediumItalic: 'OpenSans-MediumItalic',
 
-export const LARGE_FONT_SIZE: number = 20;
-
-export const DEFAULT_LINE_HEIGHT: number = 20;
-export const DEFAULT_FONT_COLOR: string = '#000000';
-export const DEFAULT_FONT_ALIGN: string = 'left';
-export const HEADER_FONT_SIZE: number = 20;
+    DEFAULT_FONT_WEIGHT: 'normal',
+    DEFAULT_FONT_SIZE: 12,
+    SEARCH_FONT_SIZE: 15,
+    MEDIUM_FONT_SIZE: 18,
+    LARGE_FONT_SIZE: 20,
+    DEFAULT_LINE_HEIGHT: 20,
+    DEFAULT_FONT_COLOR: '#000000',
+    DEFAULT_FONT_ALIGN: 'left',
+    HEADER_FONT_SIZE: 20,
+  };
+  
+  export const {
+    openSansReg,
+    openSansSemiBold,
+    openSansBold,
+    DEFAULT_FONT_WEIGHT,
+    DEFAULT_FONT_SIZE,
+    MEDIUM_FONT_SIZE,
+    LARGE_FONT_SIZE,
+    DEFAULT_LINE_HEIGHT,
+    DEFAULT_FONT_COLOR,
+    DEFAULT_FONT_ALIGN,
+    HEADER_FONT_SIZE,
+  } = NuskaFonts;

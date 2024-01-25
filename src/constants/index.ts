@@ -1,7 +1,7 @@
 
 export * from './fonts';
-export * from './styles';
+export * from './dimensions';
 export * from './colors';
 export * from './images';
-export * from './icons';
+export * from './style';
 

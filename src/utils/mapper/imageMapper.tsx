@@ -1,6 +1,4 @@
-import { LogoSVG } from "../../../assets/img/svg/LogoSVG";
-import { Settings } from "react-native";
-import { SettingsSVG } from "../../../assets/img/svg/SettingsSVG";
+import React from 'react'
 import { AboutSVG } from "../../../assets/img/svg/AboutSVG";
 import { MoonSVG } from "../../../assets/img/svg/MoonSVG";
 import { FAQSVG } from "../../../assets/img/svg/FAQSVG";
@@ -24,5 +22,18 @@ export const mapImagesSVG = (settings: string): JSX.Element | null => {
             return <AboutSVG />;
         default:
             return null;
+    }
+};
+
+export const mapImagesPNG = (onboarding: any) => {
+    switch (onboarding) {
+        case '1':
+            return require('../../../assets/img/splash_2.png');
+        case '2':
+            return require('../../../assets/img/splash_3.png');
+        case '3':
+            return require('../../../assets/img/splash_4.png');
+        default:
+            return "";
     }
 };

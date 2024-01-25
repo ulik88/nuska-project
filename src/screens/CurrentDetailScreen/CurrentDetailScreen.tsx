@@ -1,87 +1,90 @@
-import { View, Text, StyleSheet, ImageBackground, } from 'react-native'
-import SearchItemsComponent from '../../components/SearchItems/SearchItemsComponent';
-import React from 'react'
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ImageBackground } from 'react-native'
+import { SearchItemsComponent } from '../../components/SearchItem/SearchItemsComponent';
+import SettingsScreen from "../SettingScreen";
 import SettingsComponent from '../../components/Settings/SettingsComponent';
+import { Ionicons } from '@expo/vector-icons';
 
-import {
-  openSansReg,
-  PRIMARY_COLOR,
-  BLACK_COLOR,
-  THIRD_COLOR,
-  DEFAULT_FONT_SIZE,
-  WHITE_COLOR,
-  MARGIN_DEFAULT,
-  MARGIN_MEDIUM,
-  MARGIN_SMALL,
-  PADDING_SMALL,
-  MARGIN_LARGE,
-  MEDIUM_FONT_SIZE,
-  PADDING_DEFAULT,
-} from "../../constants";
+import { NuskaColor, NuskaFonts, NuskaDimensions, DEFAULT_TOP_STYLE } from '../../constants';
+
+import { ScrollView } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const CurrentDetailScreen = ({ settings, route, navigation }) => {
-  const { title, description, content, imageSource, created_at } = route.params;
 
-  // Set the header title dynamically
-  React.useLayoutEffect(() => {
-    navigation.setOptions({
-      title: title,
-    });
-  }, [navigation, title]);
+  const { title, description, content, imageSource, created_at } = route.params;
+  const [showSettings, setShowSettings] = useState(false);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.topOfContainer}>
-        <SettingsComponent onSettingsClick={settings} />
-      </View>
-      <SearchItemsComponent />
-      <View style={styles.innerContainer}>
-        <Text style={styles.description}> {description}</Text>
-        <View style={styles.imageSource}>
-          <ImageBackground
-            source={imageSource}
-            style={styles.imageBackground}
-          ></ImageBackground>
+    <SafeAreaView style={{ flex: 1, backgroundColor: NuskaColor.WHITE_COLOR }}>
+      <View style={[DEFAULT_TOP_STYLE.topOfScreen]}>
+        <View>
+          <Ionicons
+            name="chevron-back"
+            size={34}
+            color={NuskaColor.GREY_COLOR}
+            onPress={() => navigation.goBack()}
+          />
         </View>
+        <Text style={{ fontFamily: NuskaFonts.openSansSemiBold, fontSize: NuskaFonts.HEADER_FONT_SIZE }}>{title}</Text>
 
-        <Text style={{ fontFamily: openSansReg }}>{content}</Text>
-        <Text style={{ fontFamily: openSansReg }}>Posted at: {created_at}</Text>
+        {!showSettings && (
+          <SettingsComponent
+            onSettingsClick={() => setShowSettings(prevState => !prevState)}
+          />
+        )}
+
       </View>
-    </View>
+      {showSettings && (
+        <SettingsScreen
+          onSettingsClick={() => setShowSettings(true)}
+          onCloseSettings={() => setShowSettings(false)} />
+      )}
+
+      <SearchItemsComponent />
+
+      <View style={[DEFAULT_TOP_STYLE.container]}>
+        <ScrollView
+          style={styles.innerContainer}
+          showsVerticalScrollIndicator={false}
+          bounces={false}
+        >
+          <Text style={styles.description}> {description}</Text>
+          <View style={[styles.imageSource,]}>
+            <ImageBackground
+              source={imageSource}
+              style={styles.imageBackground}
+            ></ImageBackground>
+          </View>
+
+          <Text style={{ fontFamily: NuskaFonts.openSansReg }}>{content}</Text>
+          <Text style={{ fontFamily: NuskaFonts.openSansReg }}>Posted at: {created_at}</Text>
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: PADDING_SMALL,
-    backgroundColor: WHITE_COLOR,
-    alignContent: "center",
-
-  },
-
-  topOfContainer: {
-
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignContent: 'center',
-    marginHorizontal: MARGIN_LARGE,
-    marginBottom: MARGIN_MEDIUM,
-
-  },
 
   innerContainer: {
-    marginHorizontal: MARGIN_LARGE,
-    marginBottom: MARGIN_MEDIUM,
+    marginHorizontal: NuskaDimensions.MARGIN_LARGE,
   },
 
   imageSource: {
+    flex: 1,
     width: "100%",
     aspectRatio: 1.6,
     flexShrink: 0,
-    marginVertical: MARGIN_DEFAULT,
+    marginVertical: NuskaDimensions.MARGIN_DEFAULT,
+    backgroundColor: NuskaColor.SECONDARY_COLOR,
+    shadowColor: '#000',
+    shadowOffset: { width: 4, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    elevation: 1,
   },
+
   imageBackground: {
     flex: 1,
     resizeMode: "cover",
@@ -90,12 +93,13 @@ const styles = StyleSheet.create({
   },
 
   description: {
-    fontSize: MEDIUM_FONT_SIZE,
-    fontFamily: openSansReg,
-    color: BLACK_COLOR,
-    marginVertical: MARGIN_DEFAULT,
-    textAlign: "center",
-    fontWeight: "500",
+    fontSize: NuskaFonts.MEDIUM_FONT_SIZE,
+    fontFamily: NuskaFonts.openSansReg,
+    color: NuskaColor.BLACK_COLOR,
+    marginVertical: NuskaDimensions.MARGIN_DEFAULT,
+    textAlign: "left",
+    lineHeight: 25,
+    fontWeight: "600",
   },
 });
 

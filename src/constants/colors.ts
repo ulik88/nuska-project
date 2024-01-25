@@ -1,22 +1,47 @@
 // colors.ts
-export const PRIMARY_COLOR: string = 'rgba(1, 114, 187, 1)';
-export const SECONDARY_COLOR: string = 'rgba(109, 185, 228, 1)';
-export const THIRD_COLOR = '#EFF7FC';
-export const FOURTH_COLOR = 'rgba(0, 0, 0, 0.5)';
-export const WHITE_COLOR: string = '#ffffff';
-export const BLACK_COLOR: string = '#000000';
-export const GREY_COLOR: string = '#808080';
-export const LIGHT_GREY_COLOR: string = '#d3d3d3';
-export const RED_COLOR: string = '#ff0000';
-export const LIGHT_RED_COLOR: string = '#ffcccc';
-export const GREEN_COLOR: string = '#008000';
-export const LIGHT_GREEN_COLOR: string = '#ccffcc';
-export const YELLOW_COLOR: string = '#ffff00';
-export const LIGHT_YELLOW_COLOR: string = '#ffffcc';
-export const BLUE_COLOR: string = '#0000ff';
-export const LIGHT_BLUE_COLOR: string = '#ccccff';
-export const ORANGE_COLOR: string = '#ffa500';
-export const LIGHT_ORANGE_COLOR: string = '#ffe5cc';
-export const PURPLE_COLOR: string = '#800080';
-
+export const NuskaColor = {
+    PRIMARY_COLOR: 'rgba(1, 114, 187, 1)',
+    SECONDARY_COLOR: 'rgba(109, 185, 228, 1)',
+    THIRD_COLOR: '#EFF7FC',
+    FOURTH_COLOR: 'rgba(0, 0, 0, 0.5)',
+    WHITE_COLOR: '#ffffff',
+    BLACK_COLOR: '#000000',
+    GREY_COLOR: '#808080',
+    LIGHT_GREY_COLOR: '#d3d3d3',
+    RED_COLOR: '#ff0000',
+    LIGHT_RED_COLOR: '#ffcccc',
+    GREEN_COLOR: '#008000',
+    LIGHT_GREEN_COLOR: '#ccffcc',
+    YELLOW_COLOR: '#ffff00',
+    LIGHT_YELLOW_COLOR: '#ffffcc',
+    BLUE_COLOR: '#0000ff',
+    LIGHT_BLUE_COLOR: '#ccccff',
+    ORANGE_COLOR: '#ffa500',
+    LIGHT_ORANGE_COLOR: '#ffe5cc',
+    PURPLE_COLOR: '#800080',
+    SUB_CATEGORY_COLOR: '#F0F3F7',
+  };
+  
+  export const {
+    PRIMARY_COLOR,
+    SECONDARY_COLOR,
+    THIRD_COLOR,
+    FOURTH_COLOR,
+    WHITE_COLOR,
+    BLACK_COLOR,
+    GREY_COLOR,
+    LIGHT_GREY_COLOR,
+    RED_COLOR,
+    LIGHT_RED_COLOR,
+    GREEN_COLOR,
+    LIGHT_GREEN_COLOR,
+    YELLOW_COLOR,
+    LIGHT_YELLOW_COLOR,
+    BLUE_COLOR,
+    LIGHT_BLUE_COLOR,
+    ORANGE_COLOR,
+    LIGHT_ORANGE_COLOR,
+    PURPLE_COLOR,
+    SUB_CATEGORY_COLOR,
+  } = NuskaColor;
 
