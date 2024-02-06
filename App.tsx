@@ -8,9 +8,7 @@ import * as Font from 'expo-font';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Onboarding } from './src/components/Onboarding/Onboarding';
-LogBox.ignoreLogs([
-  `Constants.platform.ios.model has been deprecated in favor of expo-device's Device.modelName property. This API will be removed in SDK 45.`,
-]);
+
 const Loading = () => {
   return (
     <View>
@@ -31,7 +29,11 @@ export default function App() {
     await Font.loadAsync({
       'OpenSans-Regular': require('./assets/fonts/OpenSans-Regular.ttf'),
       'OpenSans-Bold': require('./assets/fonts/OpenSans-Bold.ttf'),
+      'OpenSans-Light': require('./assets/fonts/OpenSans-Light.ttf'),
       'OpenSans-SemiBold': require('./assets/fonts/OpenSans-SemiBold.ttf'),
+      'OpenSans-Italic': require('./assets/fonts/OpenSans-Italic.ttf'),
+      'OpenSans-SemiBoldItalic': require('./assets/fonts/OpenSans-SemiBoldItalic.ttf'),
+      'OpenSans-MediumItalic': require('./assets/fonts/OpenSans-MediumItalic.ttf'),
     });
   };
 

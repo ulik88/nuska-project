@@ -5,7 +5,7 @@ import { mapImagesSVG } from '../utils/mapper/imageMapper';
 import { NuskaColor, NuskaFonts, NuskaDimensions } from '../constants';
 import { SettingItem } from '../components/Settings/SettingItem';
 
-const SettingScreen = ({ onSettingsClick, onCloseSettings }) => {
+export const SettingScreen = ({ onSettingsClick, onCloseSettings }) => {
     const [currentSettings, setCurrentSettings] = useState(['Sprachen', 'Dark Mode', 'FAQ', 'Über Uns', 'Abmelden']);
     const [toggleIcons, setToggleIcon] = useState(false);
 
@@ -100,5 +100,3 @@ const styles = StyleSheet.create({
     },
 
 });
-
-export default SettingScreen

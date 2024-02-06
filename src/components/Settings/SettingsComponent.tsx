@@ -5,7 +5,7 @@ import React from 'react';
 import { SettingsSVG } from "../../../assets/img/svg/SettingsSVG";
 import { SettingsClickableIcon } from './SettingsClickableIcon';
 
-const SettingsComponent = ({ onSettingsClick }) => {
+export const SettingsComponent = ({ onSettingsClick }) => {
   return (
     <View>
       <SettingsClickableIcon onPress={onSettingsClick}>
@@ -13,6 +13,4 @@ const SettingsComponent = ({ onSettingsClick }) => {
       </SettingsClickableIcon>
     </View>
   );
-}
-
-export default SettingsComponent;
+};

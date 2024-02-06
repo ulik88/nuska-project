@@ -1,4 +1,5 @@
 {
+  "extends": "expo/tsconfig.base",
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "jsx": "react-native",
@@ -6,30 +7,44 @@
       "dom",
       "esnext"
     ],
-    "baseUrl": "./",
+    "strict": true,
+    "baseUrl": "./src",
     "paths": {
-      "@env/*": ["./src/components/api/@env/*"],
-      "*": ["types/*"]
+      "@env/*": [
+        "./@env/*"
+      ],
+      "*": [
+        "types/*"
+      ],
+      "react": [
+        "./node_modules/@types/react"
+      ],
+      "types": [
+        "./src/types/*"
+      ]
     },
     "moduleResolution": "node",
-    "noEmit": true,
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
   "include": [
-    "./src/**/*"
-, "mapper"  ],
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "mapper"
+  ],
   "exclude": [
     "node_modules",
     "babel.config.js",
     "metro.config.js",
     "jest.config.js"
   ],
-  "extends": "expo/tsconfig.base",
   "types": [
     "jest",
     "react",
     "react-native"
-  ]
-  
+  ],
+  "typeRoots": [
+    "./node_modules/@types",
+    "./src/types"
+  ],
 }

@@ -1,20 +1,19 @@
 import React, { useState, useRef, useCallback, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Dimensions, Animated } from 'react-native';
+import { View, Text, StyleSheet, FlatList, useWindowDimensions, Animated, } from 'react-native';
 import { CategoryData } from '../../data/CategoryData';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { NuskaColor, NuskaFonts, NuskaDimensions, DEFAULT_TOP_STYLE } from '../../constants';
 import { CategoryItem } from '../../components/CategiryItem/CategoryItem';
 import { CategoryHeadbutton } from '../../components/CategiryItem/CategoryHeadbutton';
 import { SearchItemsComponent } from '../../components/SearchItem/SearchItemsComponent';
 import { Ionicons } from '@expo/vector-icons';
-
+import { ICategoryData, ISubItem } from '../../../types';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const CategoryScreen = ({ navigation }) => {
-
+    const { width } = useWindowDimensions();
     const flatListRef = useRef(null);
 
     const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-
     const scrollX = useRef(new Animated.Value(0)).current;
 
 
@@ -33,13 +32,13 @@ export const CategoryScreen = ({ navigation }) => {
         }
     }).current;
 
-    const handlePress = (item: { title: string; }) => {
+    const handlePress = (item: { title: string }) => {
         const index = CategoryData.findIndex((category) => category.title === item.title);
         flatListRef.current.scrollToIndex({ index, animated: true });
         setCurrentSectionIndex(index);
     };
 
-    const onChangeHeadColor = (item) => {
+    const onChangeHeadColor = (item: ICategoryData) => {
         if (item.title === CategoryData[currentSectionIndex].title) {
             return NuskaColor.SECONDARY_COLOR;
         } else {
@@ -58,13 +57,15 @@ export const CategoryScreen = ({ navigation }) => {
                 // In unserem Fall content ist ein Listarray in der subItems Objekt
                 contentItems={contentItems && contentItems.content}
                 item={item}
-                currentSectionIndex={currentSectionIndex} content={undefined} />
+                description={undefined} />
         );
     };
 
     return (
 
-        <SafeAreaView style={{ flex: 1, backgroundColor: NuskaColor.WHITE_COLOR }}>
+        <SafeAreaView
+
+            style={{ width, flex: 1, backgroundColor: NuskaColor.WHITE_COLOR }}>
             <View style={[DEFAULT_TOP_STYLE.topOfScreen]}>
                 <Ionicons
                     name="chevron-back"
@@ -84,14 +85,14 @@ export const CategoryScreen = ({ navigation }) => {
                     items={CategoryData}
                     percentage
                     onPress={handlePress}
-                    onChangeHeadColor={(item) => onChangeHeadColor(item)} />
+                    onChangeHeadColor={(item: ICategoryData) => onChangeHeadColor(item)} />
 
                 {/* RENDER  CATEGORY ITEMS  */}
                 <Text style={styles.categoryText}>Kategorien</Text>
-                <View style={{ flex: 1, top: -30 }}>
+                <View style={{ flex: 0, top: -40 }}>
                     <Animated.FlatList
                         data={CategoryData}
-                        keyExtractor={(item) => item.id.toString()}
+                        keyExtractor={(item: ISubItem) => item.id.toString()}
                         renderItem={renderItem}
                         horizontal
                         showsHorizontalScrollIndicator={false}

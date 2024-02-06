@@ -4,25 +4,18 @@ import { NuskaColor, NuskaFonts, NuskaDimensions, } from '../../constants';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from '../../../types';
+import { IContent, ISubItem, RootStackParamList } from '../../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { v4 } from 'uuid';
 
-//Generic type
-interface CategoryItemProps {
-    item: any;
-    content: string;
-    contentItems: any[];
-    currentSectionIndex: number;
-}
 
-export const CategoryItem: FunctionComponent<CategoryItemProps> = ({ content, currentSectionIndex, item, contentItems }) => {
+export const CategoryItem = ({ item, contentItems, description }) => {
+
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     const { width } = useWindowDimensions();
 
     const [expanded, setExpanded] = useState({});
 
-    const toggleExpand = (subItemId) => {
+    const toggleExpand = (subItemId: number) => {
         setExpanded((prev) => ({
             ...prev,
             [subItemId]: !prev[subItemId],
@@ -33,13 +26,13 @@ export const CategoryItem: FunctionComponent<CategoryItemProps> = ({ content, cu
     return (
         <SafeAreaView style={{ flex: 1, width }}>
             <ScrollView>
-                {item.subItems.map((subItem, index) => (
+                {item.subItems.map((subItem: ISubItem, index: number) => (
                     <View key={subItem.id}>
                         <TouchableOpacity
                             onPress={() => toggleExpand(subItem.id)}
-                            style={[styles.categorySubTitleBox, { marginBottom: expanded[subItem.id] ? 0 : NuskaDimensions.MARGIN_DEFAULT }]}>
-                            <Text style={styles.categorySubTitle} key={index}>
-                                {subItem.id} - {subItem.title}
+                            style={[styles.categorySubTitleBox, { marginBottom: expanded[subItem.id] ? 0 : NuskaDimensions.MARGIN_SMALL }]}>
+                            <Text style={styles.categorySubTitle}
+                                key={index}> {subItem.id} - {subItem.sub_title}
                             </Text>
                             <SimpleLineIcons
                                 name={expanded[subItem.id] ? 'arrow-down' : 'arrow-right'}
@@ -50,29 +43,44 @@ export const CategoryItem: FunctionComponent<CategoryItemProps> = ({ content, cu
 
                         {expanded[subItem.id] && (
                             <View style={[styles.categoryItemsInnereBox]}>
-                                {subItem.content.map((contentItem, contentIndex) => (
-                                    <View key={v4()}>
-                                        <Text key={contentIndex}>{contentItem.description}</Text>
-                                        <Text key={v4()}>{contentItem.title}</Text>
+                                {subItem.content.map((contentItem: IContent, contentIndex) => (
+                                    <View key={contentIndex}>
+                                        <Text style={styles.categoryItemsInnereDesc}
+                                            key={contentIndex}>{contentItem.description}
+                                        </Text>
+                                        <Text
+                                            style={{
+                                                fontFamily: NuskaFonts.openSansReg,
+                                                marginTop: NuskaDimensions.MARGIN_DEFAULT,
+                                                fontSize: NuskaFonts.MIDDLE_FONT_SIZE,
+                                            }}
+                                        >{contentItem.content_title}</Text>
                                         {/* Add any additional content rendering here */}
                                     </View>
                                 ))}
                                 <Pressable
+                                    key={index}
                                     style={{ padding: 10, borderBottomWidth: 1, marginTop: 10 }}
                                     onPress={() => navigation.navigate('CheckList', {
-                                        id: v4,
-                                        title: item.title ? subItem.title : 'No title',
-                                        contentItems: contentItems ? subItem.content : 'No content',
-                                        content: content,
+                                        id: subItem.id,
+                                        sub_title: subItem.sub_title || '',
+                                        contentItems: subItem.content.map((contentItem: IContent) => {
+                                            return {
+                                                id: contentItem.id,
+                                                requirements: contentItem.requirements,
+                                                description: contentItem.description,
+                                                content_title: contentItem.content_title
+                                            };
+                                        }),
                                     })}>
-                                    <Text>Mehr Lesen... </Text>
+                                    <Text>Mehr lesen... </Text>
                                 </Pressable>
                             </View>
                         )}
                     </View>
                 ))}
             </ScrollView>
-        </SafeAreaView>
+        </SafeAreaView >
     );
 };
 
@@ -117,5 +125,10 @@ const styles = StyleSheet.create({
         padding: NuskaDimensions.PADDING_DEFAULT,
         paddingLeft: NuskaDimensions.PADDING_LARGE,
         paddingRight: NuskaDimensions.PADDING_LARGE
+    },
+    categoryItemsInnereDesc: {
+        fontFamily: NuskaFonts.openSansReg,
+        fontSize: NuskaFonts.MIDDLE_FONT_SIZE,
+        marginVertical: NuskaDimensions.MARGIN_DEFAULT,
     },
 });

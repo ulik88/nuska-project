@@ -1,0 +1,20 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-nuskaapp-staging-191828-authRole",
+      "UnauthRoleArn": "arn:aws:iam::574267930942:role/amplify-nuskaapp-staging-191828-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::574267930942:role/amplify-nuskaapp-staging-191828-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-nuskaapp-staging-191828-deployment",
+      "UnauthRoleName": "amplify-nuskaapp-staging-191828-unauthRole",
+      "StackName": "amplify-nuskaapp-staging-191828",
+      "StackId": "arn:aws:cloudformation:eu-central-1:574267930942:stack/amplify-nuskaapp-staging-191828/dff9bd20-aa6c-11ee-97ca-063cc77f8811",
+      "AmplifyAppId": "d29s8uioqf3p3j"
+    },
+    "categories": {
+      "auth": {
+        "nuskaApp": {}
+      }
+    }
+  }
+}

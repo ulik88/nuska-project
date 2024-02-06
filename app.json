@@ -12,7 +12,8 @@
       "assets/fonts/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ulikk.nuska"
     },
     "android": {
       "adaptiveIcon": {
@@ -23,10 +24,8 @@
     "web": {
       "favicon": "./assets/img/favicon.png"
     },
-    "extra": {
-      "eas": {
-        "projectId": "17a6018e-669c-4843-a1c1-1d26c9336102"
-      }
-    }
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

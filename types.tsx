@@ -1,51 +1,69 @@
-import { ListItem } from "react-native-elements/dist/list/ListItem";
+// interface RootStackParamList {
 
 type RootStackParamList = {
   BottomTabNav: { id: number };
   HomeScreen: { id: number };
   Auth: undefined;
   Account: undefined;
-  CurrentDetail: { id: number; title: string; description: string; imageSource: string; created_at: string; content: string };
+  Categories: undefined;
 
-  CheckListScreen: { id: number, title: string; contentItems: ListItem; content: string };
-};
-//const { title, contentItems, content } = route.params;
-/* To solve the problem, I would update the type definition of the params 
-object in the RootStackParamList type to include the contentItems property.
- */
-
-/* interface CategoryItemProps {
-  category: {
-    name: string;
-    subItems: {
-      name: string;
-      description: string;
-    }[];
-  };
-}
-
-interface CategoryItemSubProps {
-  subItem: {
-    name: string;
+  CurrentDetail: {
+    id: number | string;
+    title: string;
     description: string;
+    imageSource: string;
+    created_at: string;
+    content: string;
   };
-} */
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
+  CheckList: {
+    id: number | string;
+    sub_title: string;
+    description: string;
+    content_title: string;
+    contentItems: IContent[];
+  };
+};
 
-interface Post {
+// interface ICurrentData 
+
+interface ICurrentData {
   id: number;
   title: string;
+  description: string;
+  imageSource: string;
   content: string;
-  author: User;
+  created_at: string;
+}
+
+// interface ICategoryData 
+interface ICategoryData {
+  id: number;
+  title: string;
+  subItems: ISubItem[];
+}
+
+interface ISubItem {
+  id: number;
+  sub_title: string;
+  content: IContent[];
+}
+
+interface IContent {
+  id: number | string;
+  description?: string;
+  content_title?: string;
+  requirements?: IRequirements[];
+
+}
+
+interface IRequirements {
+  id: number;
+  requirement: string;
 }
 
 // Export the types and interfaces for use in other files
-export type { User, Post, /* CategoryItemProps, CategoryItemSubProps, */ RootStackParamList };
+export type { ICurrentData, ICategoryData, RootStackParamList, ISubItem, IContent, IRequirements };
 
 
 

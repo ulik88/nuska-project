@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native'
 import { SearchItemsComponent } from '../../components/SearchItem/SearchItemsComponent';
-import SettingsScreen from "../SettingScreen";
-import SettingsComponent from '../../components/Settings/SettingsComponent';
+import { SettingScreen } from "../SettingScreen";
+import { SettingsComponent } from '../../components/Settings/SettingsComponent';
 import { Ionicons } from '@expo/vector-icons';
 
 import { NuskaColor, NuskaFonts, NuskaDimensions, DEFAULT_TOP_STYLE } from '../../constants';
@@ -36,7 +36,7 @@ const CurrentDetailScreen = ({ settings, route, navigation }) => {
 
       </View>
       {showSettings && (
-        <SettingsScreen
+        <SettingScreen
           onSettingsClick={() => setShowSettings(true)}
           onCloseSettings={() => setShowSettings(false)} />
       )}
@@ -52,7 +52,7 @@ const CurrentDetailScreen = ({ settings, route, navigation }) => {
           <Text style={styles.description}> {description}</Text>
           <View style={[styles.imageSource,]}>
             <ImageBackground
-              source={imageSource}
+              source={{ uri: imageSource }}
               style={styles.imageBackground}
             ></ImageBackground>
           </View>

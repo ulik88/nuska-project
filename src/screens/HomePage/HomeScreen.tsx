@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Button, FlatList, StyleSheet, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
 /* import { fetchDesks } from '../../components/api/api'; */
-import ResourceCardItem from '../../components/ResourceCardItem';
+import { ResourceCardItem } from '../../components/ResourceCardItem/ResourceCardItem';
 import { SearchItemsComponent } from '../../components/SearchItem/SearchItemsComponent';
-import SettingsComponent from '../../components/Settings/SettingsComponent';
-import SettingsScreen from "../SettingScreen";
+import { SettingsComponent } from '../../components/Settings/SettingsComponent';
+import { SettingScreen } from "../SettingScreen";
 import { Logo } from '../../components/ui/Logo';
-import CurrentData from "../../data/CurrentData";
+import { CurrentData } from "../../data/CurrentData";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { NuskaColor, NuskaFonts, NuskaDimensions, DEFAULT_TOP_STYLE } from '../../constants';
-import { ItemListComponent } from '../../components/SearchItem/ItemListComponent';
-
+import { ICurrentData } from '../../../types';
 
 export const HomeScreen = () => {
 
@@ -24,11 +23,10 @@ export const HomeScreen = () => {
   }
 
   const [showSettings, setShowSettings] = useState(false);
-  const [desks, setDesks] = useState([]);
+  const [desks, setDesks] = useState<{ id: number; title: string; description: string; imageSource: string; content: string; created_at: string; }[]>([]);
 
   const testApi = () => {
     setDesks(CurrentData);
-
   };
 
   useEffect(() => {
@@ -36,25 +34,23 @@ export const HomeScreen = () => {
     testApi();
   }, []);
 
-  const renderCurrents = ({ item }: { item: any }) => {
+  const renderCurrents = ({ item }: { item: ICurrentData }) => {
     return (
       <ResourceCardItem
+        id={0}
         title={item.title}
         description={item.description}
         content={item.content}
-        imageSource={{ uri: `https://picsum.photos/200/300?random=${Math.random()}` }}
+        imageSource={`https://source.unsplash.com/random?nature=${Math.random()}`}
         created_at={item.created_at}
       />
     );
-
   };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: NuskaColor.WHITE_COLOR }}>
-      <View style={[DEFAULT_TOP_STYLE.topOfScreen]}>
-        <View>
-          <Logo />
-        </View>
+      <View style={[styles.constainerTest, DEFAULT_TOP_STYLE.topOfScreen]}>
+        <Logo />
 
         {/*   <Button title="Test API" onPress={testApi} /> */}
 
@@ -69,8 +65,9 @@ export const HomeScreen = () => {
         )}
       </View>
 
+
       {showSettings && (
-        <SettingsScreen
+        <SettingScreen
           onSettingsClick={() => setShowSettings(true)}
           onCloseSettings={() => setShowSettings(false)} />
       )}
@@ -100,16 +97,20 @@ export const HomeScreen = () => {
 
 const styles = StyleSheet.create({
 
+  constainerTest: {
+    top: 0,
+  },
+
   title: {
     fontFamily: NuskaFonts.openSansReg,
     marginLeft: NuskaDimensions.MARGIN_MEDIUM,
     marginBottom: NuskaDimensions.MARGIN_SMALL,
-    marginTop: NuskaDimensions.MARGIN_MEDIUM,
     fontSize: NuskaFonts.MEDIUM_FONT_SIZE,
     fontWeight: '500',
   },
   containerRow: {
-    padding: 5,
+    flex: 1,
+    padding: NuskaDimensions.PADDING_SMALL,
   },
 
   gridContainer: {

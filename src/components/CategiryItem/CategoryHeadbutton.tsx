@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react';
 import { NuskaColor, NuskaFonts, NuskaDimensions } from '../../constants';
+import { ICategoryData } from '../../../types';
 
 
 export const CategoryHeadbutton = ({ onChangeHeadColor, items, percentage, onPress }) => {
@@ -15,7 +16,7 @@ export const CategoryHeadbutton = ({ onChangeHeadColor, items, percentage, onPre
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 data={items}
-                keyExtractor={(item) => item.id.toString()}
+                keyExtractor={(item: ICategoryData) => item.id.toString()}
                 renderItem={({ item }) => (
                     <TouchableOpacity
                         style={[styles.categoryNameBox, { backgroundColor: onChangeHeadColor(item) }]}

@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         backgroundColor: NuskaColor.PRIMARY_COLOR,
         borderRadius: 15,
         width: 100,
-        height: 45,
+        height: NuskaDimensions.BUTTON_HEIGHT,
         justifyContent: "center",
         alignItems: "center",
         shadowColor: NuskaColor.BLACK_COLOR,
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
 
     buttonText: {
         color: NuskaColor.WHITE_COLOR,
-        fontSize: 13,
+        fontSize: NuskaFonts.MIDDLE_FONT_SIZE,
         fontFamily: NuskaFonts.openSansBold,
         fontWeight: '900',
     }

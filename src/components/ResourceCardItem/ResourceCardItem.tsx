@@ -5,23 +5,22 @@ import {
   StyleSheet,
   Pressable,
   Platform,
-  Dimensions,
-  TouchableOpacity
+  Image,
 } from "react-native";
 import React, { useRef } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { RootStackParamList } from '../../../types';
+import { ICurrentData, RootStackParamList } from '../../../types';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { NuskaColor, NuskaFonts, NuskaDimensions } from '../../constants';
+import { TextHelper } from "../../utils/helpers/TextHelper";
 
-const ResourceCardItem = ({ title, description, content, imageSource, created_at }) => {
-
+export const ResourceCardItem = ({ id, title, description, content, imageSource, created_at }: ICurrentData) => {
 
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const onPress = () => {
     navigation.navigate('CurrentDetail', {
 
-      id: 1,
+      id: 0,
       title: title,
       description: description,
       imageSource: imageSource,
@@ -36,16 +35,16 @@ const ResourceCardItem = ({ title, description, content, imageSource, created_at
       <Pressable onPress={onPress}>
         <View style={[styles.cardContainer]}>
           <View style={styles.titleContainer}>
-            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.title}>{TextHelper.getCurrentCardTitle(title)}</Text>
           </View>
           <View style={styles.overlay}>
-            <Text style={styles.description}>{description}</Text>
+            <Text style={styles.description}>{TextHelper.getCurrentCardDescription(description)}</Text>
             <Text style={styles.textMore}>Mehr lesen</Text>
             <Text style={styles.created_at}>{created_at}</Text>
           </View>
           <View style={styles.imageSource}>
             <ImageBackground
-              source={imageSource}
+              source={{ uri: imageSource }}
               style={styles.imageBackground}
             ></ImageBackground>
           </View>
@@ -114,32 +113,26 @@ const styles = StyleSheet.create({
     fontFamily: NuskaFonts.openSansBold,
   },
   description: {
-    height: NuskaDimensions.DEFAULT_HEIGHT,
+    height: NuskaDimensions.MEDIUM_HEIGHT,
     fontSize: NuskaFonts.DEFAULT_FONT_SIZE,
     fontWeight: "normal",
     color: NuskaColor.BLACK_COLOR,
     fontFamily: NuskaFonts.openSansReg,
+
   },
   created_at: {
     fontSize: 10,
-    fontFamily: NuskaFonts.openSansReg,
-    color: NuskaColor.BLACK_COLOR,
-    fontStyle: "italic",
+    fontFamily: NuskaFonts.OpenSansItalic,
+    color: NuskaColor.FOURTH_COLOR,
     fontWeight: "300",
     textAlign: "right",
   },
 
-  wrapperCustom: {
-
-  },
-
   textMore: {
-    marginBottom: NuskaDimensions.MARGIN_SMALL,
     fontSize: NuskaFonts.DEFAULT_FONT_SIZE,
-    fontStyle: "italic",
     color: NuskaColor.PRIMARY_COLOR,
-    fontFamily: NuskaFonts.openSansReg,
+    fontFamily: NuskaFonts.OpenSansItalic,
   },
 });
 
-export default ResourceCardItem;
+

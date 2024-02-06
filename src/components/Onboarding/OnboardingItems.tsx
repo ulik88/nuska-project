@@ -1,13 +1,8 @@
 import { View, Text, StyleSheet, Image, SafeAreaView, ImageBackground, useWindowDimensions } from 'react-native'
 import React from 'react'
 import { mapImagesPNG } from '../../utils/mapper/imageMapper';
-import {
-    openSansReg,
-    PRIMARY_COLOR,
-    BLACK_COLOR,
-    PADDING_LARGE,
+import { NuskaColor, NuskaDimensions, NuskaFonts } from '../../constants';
 
-} from "../../constants";
 
 export const OnboardingItems = ({ item }) => {
     const { width } = useWindowDimensions();
@@ -51,18 +46,18 @@ const styles = StyleSheet.create({
     textContainerOnboarding: {
         flex: 1,
         flexDirection: 'column',
-        padding: PADDING_LARGE,
+        padding: NuskaDimensions.PADDING_LARGE,
         justifyContent: 'flex-end',
         alignItems: 'center',
     },
     content: {
-        fontFamily: openSansReg,
+        fontFamily: NuskaFonts.openSansReg,
         fontSize: 13,
         fontWeight: '400',
-        color: BLACK_COLOR,
+        color: NuskaColor.BLACK_COLOR,
         textAlign: 'center',
         lineHeight: 20,
         letterSpacing: 0.5,
-        padding: PADDING_LARGE,
+        padding: NuskaDimensions.PADDING_LARGE,
     }
 });
